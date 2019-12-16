@@ -1,17 +1,17 @@
-using System;
-using Android.App;
+﻿using Android.App;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using HelloWorld;
+using System;
 using System.Collections;
 using System.IO;
-using HelloWorld;
 
 namespace Hangman
 {
-	[Activity (Label = "Hangman")]			
-	public class Game : Activity
-	{
+    [Activity(Label = "Hangman")]
+    public class Game : Activity
+    {
 
         public static String[] allPlayers;
         public TextView[] charView;
@@ -58,7 +58,8 @@ namespace Hangman
 
             //Submit button function
             ButtonSubmit = (Button)FindViewById(Resource.Id.ButtonSubmit);
-            ButtonSubmit.Click +=delegate {
+            ButtonSubmit.Click += delegate
+            {
                 SaveHighScoresAndProfiles();
                 MainActivity.EditText.Text = "";
                 Toast.MakeText(this, "Final Score: " + score, ToastLength.Long).Show();
@@ -131,7 +132,7 @@ namespace Hangman
             String c = AlphabetsArray[e.Position].ToString();
             AlphabetsArray[e.Position] = " ";
 
-            adapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, 
+            adapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1,
                 AlphabetsArray);
 
             //Setting adapter
@@ -141,7 +142,7 @@ namespace Hangman
             {
                 CurrentAnswer = CurrentAnswer + c;
 
-                for(int n = 0; n < AnswersArray[i].Length; n++)
+                for (int n = 0; n < AnswersArray[i].Length; n++)
                 {
                     if (charView[n].Text == c)
                     {
@@ -158,7 +159,7 @@ namespace Hangman
                     Toast.MakeText(this, "The answer: " + AnswersArray[i], ToastLength.Long).Show();
                     i++;
                     score++;
-                    ScoreView.Text = MainActivity.PlayerName+" SCORE: " + score.ToString();
+                    ScoreView.Text = MainActivity.PlayerName + " SCORE: " + score.ToString();
                     currentPlayer = MainActivity.PlayerName;
                     highscore = score;
                     QuestionView.Text = QuestionsArray[i];
@@ -176,8 +177,8 @@ namespace Hangman
                 if (WrongCounter == 6)
                 {
                     Toast.MakeText(this, "You got it wrong!", ToastLength.Short).Show();
-                    Toast.MakeText(this, "Correct answer is: "+ AnswersArray[i], ToastLength.Long).Show();
-                    Toast.MakeText(this, MainActivity.PlayerName+"'s"+" SCORE: " + score, ToastLength.Long).Show();
+                    Toast.MakeText(this, "Correct answer is: " + AnswersArray[i], ToastLength.Long).Show();
+                    Toast.MakeText(this, MainActivity.PlayerName + "'s" + " SCORE: " + score, ToastLength.Long).Show();
                     currentPlayer = MainActivity.PlayerName;
                     MainActivity.EditText.Text = "";
                     highscore = score;
@@ -207,4 +208,3 @@ namespace Hangman
         }
     }
 }
-
